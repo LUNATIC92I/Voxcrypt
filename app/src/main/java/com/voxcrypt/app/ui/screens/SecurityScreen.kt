@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
+import com.voxcrypt.app.ui.util.vxViewModel
 import com.voxcrypt.app.BuildConfig
 import com.voxcrypt.app.VoxcryptApp
 import com.voxcrypt.app.crypto.KeyDerivation
@@ -81,7 +81,7 @@ class SecurityViewModel(app: Application) : AndroidViewModel(app) {
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun SecurityScreen(onBack: () -> Unit, vm: SecurityViewModel = viewModel()) {
+fun SecurityScreen(onBack: () -> Unit, vm: SecurityViewModel = vxViewModel()) {
     val s by vm.settings.collectAsStateWithLifecycle()
     val bench by vm.benchmarking.collectAsStateWithLifecycle()
     val deviceKey by vm.deviceKey.collectAsStateWithLifecycle()

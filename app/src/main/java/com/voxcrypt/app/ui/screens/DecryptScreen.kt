@@ -32,7 +32,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
+import com.voxcrypt.app.ui.util.vxViewModel
 import com.voxcrypt.app.VoxcryptApp
 import com.voxcrypt.app.audio.AudioInfo
 import com.voxcrypt.app.audio.AudioPlayer
@@ -232,7 +232,7 @@ fun DecryptScreen(
     vaultName: String?,
     uri: Uri?,
     onBack: () -> Unit,
-    vm: DecryptViewModel = viewModel(),
+    vm: DecryptViewModel = vxViewModel(),
 ) {
     val target by vm.target.collectAsStateWithLifecycle()
     val op by vm.op.collectAsStateWithLifecycle()
@@ -326,7 +326,7 @@ fun DecryptScreen(
                     PlayerBar(player, vm::togglePlay, vm::seek)
                     Text("La copie déchiffrée est temporaire et privée. Elle est effacée en quittant cet écran.", style = MaterialTheme.typography.bodySmall, color = Vx.SilverDim)
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        NeonButton("Exporter l'audio", { vm.pausePlayback(); confirmExport = true }, Modifier.weight(1f), VxIcons.Export, kind = ButtonKind.Secondary, height = 44.dp)
+                        NeonButton("Exporter", { vm.pausePlayback(); confirmExport = true }, Modifier.weight(1f), VxIcons.Export, kind = ButtonKind.Secondary, height = 44.dp)
                         NeonButton("Effacer", vm::wipeDecrypted, Modifier.weight(1f), VxIcons.Delete, kind = ButtonKind.Danger, height = 44.dp)
                     }
                 }

@@ -67,10 +67,9 @@ android {
         resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
     }
     testOptions {
+        unitTests.isIncludeAndroidResources = true
         unitTests.all {
-            // Low heap on purpose: the large file tests prove that encryption streams
-            // instead of loading the whole audio in memory.
-            it.maxHeapSize = "160m"
+            it.maxHeapSize = "2g"
             it.testLogging {
                 events("passed", "failed", "skipped")
                 showStandardStreams = true
@@ -96,8 +95,38 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.test.core)
+    testImplementation(platform(libs.androidx.compose.bom))
+    testImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.test.manifest)
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation(libs.androidx.test.rules)
+}
+
+// The streaming test runs in its own JVM limited to 160 MiB of heap: encrypting
+// and decrypting 256 MiB there proves memory does not grow with the file size.
+// Robolectric UI tests need a larger heap, hence the split.
+afterEvaluate {
+    listOf("Debug", "Release").forEach { variant ->
+        val unit = tasks.named<Test>("test${variant}UnitTest")
+        val memory = tasks.register<Test>("streamingMemory${variant}Test") {
+            description = "Large file streaming test with a 160 MiB heap."
+            group = "verification"
+            testClassesDirs = unit.get().testClassesDirs
+            classpath = unit.get().classpath
+            maxHeapSize = "160m"
+            filter { includeTestsMatching("*LargeFileStreamingTest") }
+            testLogging {
+                events("passed", "failed", "skipped")
+                showStandardStreams = true
+            }
+        }
+        unit.configure {
+            filter { excludeTestsMatching("*LargeFileStreamingTest") }
+            dependsOn(memory)
+        }
+    }
 }

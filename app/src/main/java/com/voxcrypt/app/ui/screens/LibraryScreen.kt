@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
+import com.voxcrypt.app.ui.util.vxViewModel
 import com.voxcrypt.app.VoxcryptApp
 import com.voxcrypt.app.audio.AudioInfo
 import com.voxcrypt.app.audio.AudioPlayer
@@ -166,7 +166,7 @@ fun LibraryScreen(
     onDecrypt: (VaultEntry) -> Unit,
     onEncryptPending: (PendingRecording) -> Unit,
     onRecord: () -> Unit,
-    vm: LibraryViewModel = viewModel(),
+    vm: LibraryViewModel = vxViewModel(),
 ) {
     val version by vm.vaultVersion.collectAsStateWithLifecycle()
     val vault by vm.vault.collectAsStateWithLifecycle()

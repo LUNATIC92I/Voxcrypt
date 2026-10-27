@@ -7,3 +7,9 @@
     public static int d(...);
     public static int i(...);
 }
+
+# View models are created by reflection through their (Application) constructor
+# (see ui/util/ViewModels.kt). AndroidX already keeps it; stated explicitly here.
+-keepclassmembers class * extends androidx.lifecycle.AndroidViewModel {
+    <init>(android.app.Application);
+}

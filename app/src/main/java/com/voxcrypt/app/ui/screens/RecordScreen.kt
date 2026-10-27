@@ -56,7 +56,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
+import com.voxcrypt.app.ui.util.vxViewModel
 import com.voxcrypt.app.VoxcryptApp
 import com.voxcrypt.app.audio.AudioPlayer
 import com.voxcrypt.app.audio.VoiceRecorder
@@ -171,7 +171,7 @@ class RecordViewModel(app: Application) : AndroidViewModel(app) {
 fun RecordScreen(
     onBack: () -> Unit,
     onEncrypt: (PendingRecording) -> Unit,
-    vm: RecordViewModel = viewModel(),
+    vm: RecordViewModel = vxViewModel(),
 ) {
     val context = LocalContext.current
     val state by vm.state.collectAsStateWithLifecycle()

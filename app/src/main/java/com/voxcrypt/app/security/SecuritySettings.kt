@@ -1,6 +1,7 @@
 package com.voxcrypt.app.security
 
 import android.content.Context
+import androidx.core.content.edit
 import com.voxcrypt.app.crypto.VxcFormat
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -33,17 +34,17 @@ class SecuritySettings(context: Context) {
     )
 
     fun setIterations(value: Int) {
-        prefs.edit().putInt(KEY_ITERATIONS, value.coerceIn(VxcFormat.MIN_PBKDF2_ITERATIONS, VxcFormat.MAX_PBKDF2_ITERATIONS)).apply()
+        prefs.edit { putInt(KEY_ITERATIONS, value.coerceIn(VxcFormat.MIN_PBKDF2_ITERATIONS, VxcFormat.MAX_PBKDF2_ITERATIONS)) }
         state.value = read()
     }
 
     fun setBlockScreenshots(value: Boolean) {
-        prefs.edit().putBoolean(KEY_BLOCK_SCREENSHOTS, value).apply()
+        prefs.edit { putBoolean(KEY_BLOCK_SCREENSHOTS, value) }
         state.value = read()
     }
 
     fun recordBenchmark(iterations: Int, millis: Long) {
-        prefs.edit().putInt(KEY_BENCH_IT, iterations).putLong(KEY_BENCH_MS, millis).apply()
+        prefs.edit { putInt(KEY_BENCH_IT, iterations).putLong(KEY_BENCH_MS, millis) }
         state.value = read()
     }
 

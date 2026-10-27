@@ -85,13 +85,14 @@ fun VxScaffold(
     subtitle: String? = null,
     onBack: (() -> Unit)? = null,
     scrollable: Boolean = true,
+    showHeader: Boolean = true,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     Box(Modifier.fillMaxSize().vxBackground().safeDrawingPadding().imePadding()) {
         Column(
             Modifier.fillMaxSize().widthIn(max = 720.dp).align(Alignment.TopCenter),
         ) {
-            Row(
+            if (showHeader) Row(
                 Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 8.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
@@ -113,7 +114,7 @@ fun VxScaffold(
                     }
                 }
             }
-            ScanLine()
+            if (showHeader) ScanLine()
             val body = Modifier.fillMaxWidth().weight(1f).padding(horizontal = 16.dp)
             Column(
                 if (scrollable) body.verticalScroll(rememberScrollState()) else body,

@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
+import com.voxcrypt.app.ui.util.vxViewModel
 import com.voxcrypt.app.VoxcryptApp
 import com.voxcrypt.app.ui.components.HudPanel
 import com.voxcrypt.app.ui.components.MenuTile
@@ -62,17 +63,18 @@ fun HomeScreen(
     onDecrypt: () -> Unit,
     onLibrary: () -> Unit,
     onSecurity: () -> Unit,
-    vm: HomeViewModel = viewModel(),
+    vm: HomeViewModel = vxViewModel(),
 ) {
     val status by vm.status.collectAsStateWithLifecycle()
     val settings by vm.settings.collectAsStateWithLifecycle()
     val version by vm.vaultVersion.collectAsStateWithLifecycle()
     LaunchedEffect(version) { vm.refresh() }
 
-    VxScaffold(title = "VOXCRYPT", subtitle = "SYSTÈME DE CRYPTOGRAPHIE VOCALE") {
-        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(6.dp)) {
+    VxScaffold(title = "VOXCRYPT", showHeader = false) {
+        Column(Modifier.fillMaxWidth().padding(top = 24.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(6.dp)) {
             VoxLogo(150.dp)
             Text("VOXCRYPT", style = MaterialTheme.typography.displaySmall, color = Vx.Silver)
+            Text("SYSTÈME DE CRYPTOGRAPHIE VOCALE", style = MaterialTheme.typography.labelSmall, color = Vx.SilverDim)
             Text(
                 "Your Voice. Your Privacy. Your Control.",
                 style = MaterialTheme.typography.bodyMedium, color = Vx.Cyan, textAlign = TextAlign.Center,

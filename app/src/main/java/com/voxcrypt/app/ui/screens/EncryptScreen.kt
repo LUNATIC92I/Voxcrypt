@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
+import com.voxcrypt.app.ui.util.vxViewModel
 import com.voxcrypt.app.VoxcryptApp
 import com.voxcrypt.app.audio.AudioInfo
 import com.voxcrypt.app.crypto.PasswordPolicy
@@ -211,7 +211,7 @@ fun EncryptScreen(
     uri: Uri?,
     onBack: () -> Unit,
     onLibrary: () -> Unit,
-    vm: EncryptViewModel = viewModel(),
+    vm: EncryptViewModel = vxViewModel(),
 ) {
     val source by vm.source.collectAsStateWithLifecycle()
     val op by vm.op.collectAsStateWithLifecycle()
