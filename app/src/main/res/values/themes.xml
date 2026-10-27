@@ -1,0 +1,8 @@
+<resources>
+    <style name="Theme.Voxcrypt" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/vx_black</item>
+        <item name="android:statusBarColor">@color/vx_black</item>
+        <item name="android:navigationBarColor">@color/vx_black</item>
+        <item name="android:colorAccent">@color/vx_turquoise</item>
+    </style>
+</resources>

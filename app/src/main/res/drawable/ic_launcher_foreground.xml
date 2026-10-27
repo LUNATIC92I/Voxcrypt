@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Hexagonal frame + voice waveform: VOXCRYPT emblem. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <path android:strokeColor="#2A6BFF" android:strokeWidth="2.2" android:fillColor="#00000000"
+        android:strokeLineJoin="round"
+        android:pathData="M54,26 L78,40 L78,68 L54,82 L30,68 L30,40 Z" />
+    <path android:strokeColor="#19E3D3" android:strokeWidth="1" android:fillColor="#00000000"
+        android:pathData="M54,31 L74,42.5 L74,65.5 L54,77 L34,65.5 L34,42.5 Z" />
+    <path android:strokeColor="#19E3D3" android:strokeWidth="3" android:strokeLineCap="round"
+        android:pathData="M41,50v8M47,45v18M54,40v28M61,45v18M67,50v8" />
+</vector>
