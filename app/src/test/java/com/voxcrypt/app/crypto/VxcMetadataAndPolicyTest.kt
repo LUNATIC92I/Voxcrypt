@@ -9,7 +9,7 @@ import org.junit.Test
 class VxcMetadataAndPolicyTest {
     @Test
     fun metadata_roundTrip_unicode() {
-        val m = VxcMetadata("Réunion d'équipe 🎙.m4a", "audio/mp4", 42L, 61_000L, 1234L)
+        val m = VxcMetadata("Réunion d'équipe n°3 日本語.m4a", "audio/mp4", 42L, 61_000L, 1234L)
         assertEquals(m, VxcMetadata.decode(m.encode()))
     }
 
